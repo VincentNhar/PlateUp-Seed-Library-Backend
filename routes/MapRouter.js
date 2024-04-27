@@ -1,6 +1,9 @@
 const express = require("express");
 const MapModel = require("../model/Map");
 const router = express.Router();
+const cors = require('cors');
+
+router.use(cors())
 
 // Route to add a new map seed
 router.post("/map/add", async (req, res) => {
