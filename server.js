@@ -21,7 +21,7 @@ app.use(express.urlencoded());
 app.use("/",mapRouter);
 
 // Define a port for the server to listen on
-const PORT = 3001;
+const PORT = process.env.PORT || 5000
 
 // MongoDB connection string
 const DB_CONNECTION_STRING = "mongodb+srv://dbrootadmin:dbpassword@cluster0.o0ag19w.mongodb.net/PlateUpMapSeeds?retryWrites=true&w=majority";

@@ -1,6 +1,9 @@
 const express = require("express");
 const MapModel = require("../model/Map");
 const router = express.Router();
+const cors = require('cors');
+
+router.use(cors())
 
 // Route to add a new map seed
 router.post("/map/add", async (req, res) => {
@@ -14,7 +17,7 @@ router.post("/map/add", async (req, res) => {
         });
 
         // Save the new map to the database
-        const { data } = await newMap.save();
+        const data = await newMap.save();
 
         // Log success message and send response with status 201 (Created)
         console.log("New map has been added:", data);
@@ -61,6 +64,29 @@ router.get("/map/seed/:seed", async (req, res) => {
         }
     } catch (error) {
         // Log error message and send response with status 500 (Internal Server Error)
+        console.error("Error occurred:", error);
+        res.status(500).send(error);
+    }
+});
+
+router.put("/map/:id", async(req,res)=>{
+    try{
+
+        const mapId = req.params.id
+        const data = req.body;
+
+        const updatedData = await MapModel.findOneAndUpdate(
+            { _id: mapId },
+            data,
+            { new: true }
+        );
+
+        if (!updatedData) {
+            return res.status(404).json({ message: "Map not found" });
+        }
+        res.status(200).json(updatedData);
+
+    }catch(error){
         console.error("Error occurred:", error);
         res.status(500).send(error);
     }
