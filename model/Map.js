@@ -89,4 +89,4 @@ mapSchema.pre('save',function (next){
     next();
 })
 
-module.exports = mongoose.model("MapTest",mapSchema)
+module.exports = mongoose.model("Map",mapSchema)
