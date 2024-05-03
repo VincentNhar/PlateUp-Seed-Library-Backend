@@ -6,7 +6,7 @@ const cors = require('cors');
 router.use(cors())
 
 //
-router.post("/ping", async (req,res) => {
+router.get("/ping", async (req,res) => {
     res.status(201).json({message: "I have been pinged !"})
 })
 
