@@ -5,6 +5,11 @@ const cors = require('cors');
 
 router.use(cors())
 
+//
+router.post("/ping", async (req,res) => {
+    res.status(201).json({message: "I have been pinged !"})
+})
+
 // Route to add a new map seed
 router.post("/map/add", async (req, res) => {
     try {
